@@ -1,0 +1,36 @@
+{
+  "name": "ts-dde",
+  "version": "0.1.0",
+  "description": "Dynamic Data Exchange (DDE) 通信组件",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zlq4863947/ts-dde"
+  },
+  "license": "GPL3",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "rm": "rimraf dist",
+    "tsc": "npm run rm && tsc -p tsconfig.development.json",
+    "tslint": "tslint --project ./tslint.json",
+    "test": "mocha dist/**/*.test.js --timeout 3000 --require intelli-espower-loader",
+    "prepare": "npm run rm && tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "edge": "^7.10.1"
+  },
+  "devDependencies": {
+    "@types/config": "0.0.32",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.31",
+    "@types/power-assert": "^1.4.29",
+    "config": "^1.26.1",
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^3.5.0",
+    "power-assert": "^1.4.4",
+    "rimraf": "^2.6.2",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.6.0",
+    "typescript": "^2.4.2"
+  }
+}
