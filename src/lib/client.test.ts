@@ -1,4 +1,4 @@
-import { Server, Client } from '../';
+import { Client } from '../';
 import * as assert from 'power-assert';
 const path = require('path');
 const exec = require('child_process').exec;
