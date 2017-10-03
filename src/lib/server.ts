@@ -1,7 +1,7 @@
 import { DdeData } from './types';
 import { EventEmitter } from 'events';
 import * as path from 'path';
-const edge = require('edge');
+const edge = require('edge-js');
 
 const modelPath = path.join(path.dirname(__filename), '/../../dll');
 console.log(modelPath + '/server.cs')
