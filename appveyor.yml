@@ -1,0 +1,53 @@
+install:
+  # Update Node.js
+  # 標準で入っている Node.js を更新します (2014/11/13 時点では、v0.10.32 が標準)
+  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+  - node --version
+
+  # Update NPM
+  - npm install -g npm
+  - npm --version
+
+  # Update node-gyp
+  # 必須! node-gyp のバージョンを上げないと、ネイティブモジュールのコンパイルに失敗します
+  - npm install -g node-gyp
+
+  # Install dependencies & devDependencies
+  # Visual Studio のバージョンを指定しないとコンパイルが通らない場合あり
+  - npm install --build-from-source --msvs_version=2013
+
+  # 以下は、プロジェクトに合わせてください
+  # 例として、パッケージ管理に bower, ビルドツールに grunt を用いている場合
+
+  # Install build tools
+  - npm install -g grunt-cli bower
+  - grunt --version
+  - bower --version
+
+  # Install bower packages
+  - bower install
+
+  # Build
+  - grunt build
+
+test_script:
+# テスト用のコマンドを指定します
+  - npm test
+
+environment:
+  matrix:
+    - nodejs_version: 0.10
+
+init:
+# git clone の際の改行を変換しないようにします
+  - git config --global core.autocrlf false
+
+branches:
+# ビルドするブランチを制限する場合に記述します
+  only:
+    - master
+  except:
+    - gh-pages
+
+build: off
+deploy: off
