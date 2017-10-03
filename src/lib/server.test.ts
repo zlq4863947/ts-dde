@@ -1,5 +1,4 @@
 import { Server } from '../';
-const timelineplayer = require('timelineplayer');
 import * as assert from 'power-assert';
 
 const testStart = async (done: any) => {
