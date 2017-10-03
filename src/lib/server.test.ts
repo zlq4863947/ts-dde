@@ -1,34 +1,41 @@
-import { Server } from "../";
-import * as assert from "power-assert";
+import { Server } from '../';
+const timelineplayer = require('timelineplayer');
+import * as assert from 'power-assert';
 
 const testStart = async (done: any) => {
-  const server = new Server("myapp");
-  console.log("服务器信息：", server.service());
-  console.log("是否已注册：", server.isRegistered());
+
+  const server = new Server('myapp');
+
+  const id = setInterval(function() {
+    server.advise('*', '*');
+  }, 1000);
+
+  console.log('服务器信息：', server.service());
+  console.log('是否已注册：', server.isRegistered());
   assert(!server.isRegistered());
   // 绑定断开事件
-  server.on("disconnect", (service, topic) => {
-    console.log("OnDisconnect: ", "Service: " + service, ", Topic: " + topic);
+  server.on('disconnect', (service, topic) => {
+    console.log('OnDisconnect: ', 'Service: ' + service, ', Topic: ' + topic);
   });
   // 绑定通知事件
-  server.on("advise", (topic, item, format) => {
+  server.on('advise', (topic, item, format) => {
     console.log(
-      "OnAdvise(通知事件): ",
-      "Topic(主题): " + topic,
-      ", Item(数据项): " + item,
-      ", Format: " + format
+      'OnAdvise(通知事件): ',
+      'Topic(主题): ' + topic,
+      ', Item(数据项): ' + item,
+      ', Format: ' + format
     );
   });
 
-  var i = 0;
+  let i = 0;
   server.onAdvise = () => {
-    return "advise-" + i++;
+    return 'advise-' + i++;
   };
 
   // 注册服务
   server.register();
   // 是否注册成功
-  console.log("是否注册成功：", server.isRegistered());
+  console.log('是否注册成功：', server.isRegistered());
   assert(server.isRegistered());
 
   // 等待4秒
@@ -41,12 +48,15 @@ const testStart = async (done: any) => {
   // 释放资源
   server.dispose();
 
+  clearInterval(id);
+
   done();
 };
 
-describe("DDE服务端测试", () => {
+describe('DDE服务端测试', () => {
   it('测试是否启动成功', function (done) {
-    this.timeout(10000);
+    this.timeout(20000);
     testStart(done);
   });
 });
+
