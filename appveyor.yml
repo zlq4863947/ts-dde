@@ -16,7 +16,7 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
   # Typical npm stuff.
   - npm install
-  - npm run rebuild-tests
+  - npm test
 
 # Post-install test scripts.
 test_script:
