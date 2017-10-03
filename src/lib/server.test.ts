@@ -1,14 +1,52 @@
-import { Server } from '../';
-import * as assert from 'power-assert';
+import { Server } from "../";
+import * as assert from "power-assert";
 
-const testInvok = (done: any) => {
-  assert(true);
+const testStart = async (done: any) => {
+  const server = new Server("myapp");
+  console.log("服务器信息：", server.service());
+  console.log("是否已注册：", server.isRegistered());
+  assert(!server.isRegistered());
+  // 绑定断开事件
+  server.on("disconnect", (service, topic) => {
+    console.log("OnDisconnect: ", "Service: " + service, ", Topic: " + topic);
+  });
+  // 绑定通知事件
+  server.on("advise", (topic, item, format) => {
+    console.log(
+      "OnAdvise(通知事件): ",
+      "Topic(主题): " + topic,
+      ", Item(数据项): " + item,
+      ", Format: " + format
+    );
+  });
+
+  var i = 0;
+  server.onAdvise = () => {
+    return "advise-" + i++;
+  };
+
+  // 注册服务
+  server.register();
+  // 是否注册成功
+  console.log("是否注册成功：", server.isRegistered());
+  assert(server.isRegistered());
+
+  // 等待4秒
+  await new Promise(resolve => setTimeout(resolve, 4000));
+
+  // 断开连接
+  server.disconnect();
+  // 注销服务
+  server.unregister();
+  // 释放资源
+  server.dispose();
+
   done();
-}
+};
 
-
-describe('DDE服务端测试', () => {
-
-  it('测试是否执行', testInvok);
-
+describe("DDE服务端测试", () => {
+  it('测试是否启动成功', function (done) {
+    this.timeout(10000);
+    testStart(done);
+  });
 });

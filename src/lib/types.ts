@@ -33,7 +33,7 @@ export interface DdeData {
  */
 export interface ClientData extends DdeData {
   /**
-   * 文本项目？
+   * 内容？
    */
   text: string,
   /**
