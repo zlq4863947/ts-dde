@@ -19,7 +19,6 @@ install:
 
 # Post-install test scripts.
 test_script:
-  test_script:
   - npm test
   
 # Don't actually build.
