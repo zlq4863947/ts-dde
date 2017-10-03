@@ -16,7 +16,6 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
   # Typical npm stuff.
   - npm install
-  - npm install edge
   - npm run rebuild-tests
 
 # Post-install test scripts.
