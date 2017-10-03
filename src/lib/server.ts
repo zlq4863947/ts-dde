@@ -4,6 +4,8 @@ import * as path from 'path';
 const edge = require('edge');
 
 const modelPath = path.join(path.dirname(__filename), '/../../dll');
+console.log(modelPath + '/server.cs')
+console.log(modelPath + '/NDde.dll')
 const getInvoker = edge.func({
   source: modelPath + '/server.cs',
   references: [modelPath + '/NDde.dll'],
@@ -16,6 +18,10 @@ const getInvoker = edge.func({
  */
 export class Server extends EventEmitter {
 
+  // 主题
+  topic: string;
+  // 数据项
+  item: string;
   private _invoke: any;
   onBeforeConnect: () => true;
   onAfterConnect: (service: string, topic: string) => void;
@@ -24,8 +30,8 @@ export class Server extends EventEmitter {
   onStopAdvise: (...args: string[]) => void;
   onExecute: (...args: string[]) => void;
   onPoke: (...args: string[]) => void;
-  onRequest: (...args: string[]) => '';
-  onAdvise: (...args: string[]) => '';
+  onRequest: (...args: string[]) => string;
+  onAdvise: (...args: string[]) => string;
   /**
    * 服务端构造函数
    * @param service 服务名
@@ -86,8 +92,8 @@ export class Server extends EventEmitter {
   advise = (topic: string, item: string) => {
     this._invoke({
       method: 'Advise',
-      topic: topic, // || this.topic,
-      item: item, // || this.item
+      topic: topic || this.topic,
+      item: item || this.item
     }, () => { });
   }
 
@@ -111,6 +117,9 @@ export class Server extends EventEmitter {
     return this._invoke({ method: 'Service' }, true);
   };
 
+  /**
+   * 是否已注册
+   */
   isRegistered = () => {
     return this._invoke({ method: 'IsRegistered' }, true);
   }
