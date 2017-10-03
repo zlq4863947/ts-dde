@@ -100,12 +100,14 @@ server.register();
 
 ### Server
 
+| 方法名   |   说明  | 使用例   |
+|--------|-----------|--------|
 | register   | 注册服务 | server.register()   |
 | unregister   | 注销服务 | server.unregister()   |
 | advise   | 建立数据传输接口 | server.advise(topic, item)   |
-| disconnect   | 断开连接 | client.disconnect()   |
-| pause   | 暂停服务 | client.pause()   |
-| resume   | 恢复服务 | client.resume()   |
-| dispose   | 释放资源 | client.dispose()   |
-| service   | 获取服务名 | client.service()   |
-| isRegistered   | 是否已注册 | client.isRegistered()   |
+| disconnect   | 断开连接 | server.disconnect()   |
+| pause   | 暂停服务 | server.pause()   |
+| resume   | 恢复服务 | server.resume()   |
+| dispose   | 释放资源 | server.dispose()   |
+| service   | 获取服务名 | server.service()   |
+| isRegistered   | 是否已注册 | server.isRegistered()   |
