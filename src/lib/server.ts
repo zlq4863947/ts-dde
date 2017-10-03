@@ -4,8 +4,6 @@ import * as path from 'path';
 const edge = require('edge-js');
 
 const modelPath = path.join(path.dirname(__filename), '/../../dll');
-console.log(modelPath + '/server.cs')
-console.log(modelPath + '/NDde.dll')
 const getInvoker = edge.func({
   source: modelPath + '/server.cs',
   references: [modelPath + '/NDde.dll'],
@@ -23,15 +21,15 @@ export class Server extends EventEmitter {
   // 数据项
   item: string;
   private _invoke: any;
-  onBeforeConnect: () => true;
-  onAfterConnect: (service: string, topic: string) => void;
-  onDisconnect: (service: string, topic: string) => void;
-  onStartAdvise: (...args: string[]) => true;
-  onStopAdvise: (...args: string[]) => void;
-  onExecute: (...args: string[]) => void;
-  onPoke: (...args: string[]) => void;
-  onRequest: (...args: string[]) => string;
-  onAdvise: (...args: string[]) => string;
+  onBeforeConnect = (topic?: string) => true;
+  onAfterConnect = (service: string, topic: string) => void 0;
+  onDisconnect = (service: string, topic: string) => void 0;
+  onStartAdvise = (...args: any[]) => true;
+  onStopAdvise = (...args: any[]) => void 0;
+  onExecute = (...args: any[]) => void 0;
+  onPoke = (...args: any[]) => void 0;
+  onRequest = (...args: any[]) => '';
+  onAdvise = (...args: any[]) => '';
   /**
    * 服务端构造函数
    * @param service 服务名
@@ -42,7 +40,8 @@ export class Server extends EventEmitter {
       service: service,
       callbacks: {
         OnBeforeConnect: (dde: DdeData, cb: (func: any, task: any) => void) => {
-          cb(null, this.emit('before connect', dde.topic));
+          this.emit('before connect', dde.topic);
+          cb(null, this.onBeforeConnect(dde.topic));
         },
         OnAfterConnect: (dde: DdeData) => {
           this.emit('after connect', dde.service, dde.topic);
@@ -57,24 +56,24 @@ export class Server extends EventEmitter {
           cb(null, this.onStartAdvise(dde.service, dde.topic, dde.item, dde.format));
         },
         OnStopAdvise: (dde: DdeData) => {
-          this.emit('stop advise', dde.topic, dde.topic, dde.item);
-          this.onStopAdvise(dde.topic, dde.topic, dde.item);
+          this.emit('stop advise', dde.service, dde.topic, dde.item);
+          this.onStopAdvise(dde.service, dde.topic, dde.item);
         },
         OnExecute: (dde: DdeData, cb: (func: any, task: any) => void) => {
-          this.emit('execute', dde.service, dde.topic, dde.item);
-          cb(null, this.onExecute(dde.service, dde.topic, dde.item));
+          this.emit('execute', dde.service, dde.topic, dde.command);
+          cb(null, this.onExecute(dde.service, dde.topic, dde.command));
         },
         OnPoke: (dde: DdeData, cb: (func: any, task: any) => void) => {
-          this.emit('poke', dde.service, dde.topic, dde.item, dde.format);
-          cb(null, this.onPoke(dde.service, dde.topic, dde.item, dde.format));
+          this.emit('poke', dde.service, dde.topic, dde.item, dde.data, dde.format);
+          cb(null, this.onPoke(dde.service, dde.topic, dde.item, dde.data, dde.format));
         },
         OnRequest: (dde: DdeData, cb: (func: any, task: any) => void) => {
           this.emit('request', dde.service, dde.topic, dde.item, dde.format);
           cb(null, this.onRequest(dde.service, dde.topic, dde.item, dde.format));
         },
         OnAdvise: (dde: DdeData, cb: (func: any, task: any) => void) => {
-          this.emit('advise', dde.service, dde.topic, dde.item, dde.format);
-          cb(null, this.onAdvise(dde.service, dde.topic, dde.item, dde.format));
+          this.emit('advise', dde.topic, dde.item, dde.format);
+          cb(null, this.onAdvise(dde.topic, dde.item, dde.format));
         }
       }
     }
@@ -94,7 +93,7 @@ export class Server extends EventEmitter {
       method: 'Advise',
       topic: topic || this.topic,
       item: item || this.item
-    }, () => { });
+    }, () => void 0);
   }
 
   disconnect = () => {

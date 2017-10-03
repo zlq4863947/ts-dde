@@ -23,7 +23,9 @@ export interface DdeData {
   /**
    * 数据
    */
-  data: string[]
+  data: string[],
+
+  command: string
 }
 
 /**

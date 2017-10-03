@@ -30,7 +30,7 @@ export class Client extends EventEmitter {
   constructor(input: ClientInput) {
     super();
     const opts = {
-      service: input,
+      services: input,
       callbacks: {
         OnDisconnected: (dde: ClientData) => {
           this.emit('disconnected', dde.service, dde.topic, dde.isDisposed, dde.isServerInitiated);
@@ -85,7 +85,7 @@ export class Client extends EventEmitter {
     }, true);
   };
 
-  startAdvise = (format: string, hot: boolean, timeout: number) => {
+  startAdvise = (format?: string, hot?: boolean, timeout?: number) => {
     this._invoke({
       method: 'StartAdvise',
       item: this.item || '',
@@ -95,7 +95,10 @@ export class Client extends EventEmitter {
     }, true);
   };
 
-  stopAdvise = (timeout: number) => {
+  stopAdvise = (item?: string, timeout?: number) => {
+    if (item) {
+      this.item = item;
+    }
     this._invoke({
       method: 'StopAdvise',
       item: this.item || '',
