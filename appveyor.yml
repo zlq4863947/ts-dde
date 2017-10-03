@@ -16,16 +16,12 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
   # Typical npm stuff.
   - npm install
-  - npm test
 
 # Post-install test scripts.
 test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
-  # run tests
-  - IF %nodejs_version% LSS 1 (npm test) ELSE (IF %nodejs_version% LSS 4 (iojs node_modules\tap\bin\tap.js --gc test/js/*-test.js) ELSE (node node_modules\tap\bin\tap.js --gc test/js/*-test.js))
-
+  test_script:
+  - npm test
+  
 # Don't actually build.
 build: off
 
