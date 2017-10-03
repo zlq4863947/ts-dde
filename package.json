@@ -17,7 +17,7 @@
     "prepare": "npm run rm && tsc -p tsconfig.json"
   },
   "dependencies": {
-    "edge": "^7.10.1"
+    "edge-js": "^8.2.5"
   },
   "devDependencies": {
     "@types/config": "0.0.32",
