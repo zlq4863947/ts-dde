@@ -1,60 +1,33 @@
-install:
-  # Update Node.js
-  # 標準で入っている Node.js を更新します (2014/11/13 時点では、v0.10.32 が標準)
-  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
-  - node --version
+# http://www.appveyor.com/docs/appveyor-yml
 
-  # Update NPM
-  - npm install -g npm
-  - npm --version
-
-  # Update node-gyp
-  # 必須! node-gyp のバージョンを上げないと、ネイティブモジュールのコンパイルに失敗します
-  - npm install -g node-gyp
-
-  # Install dependencies & devDependencies
-  # Visual Studio のバージョンを指定しないとコンパイルが通らない場合あり
-  - npm install --build-from-source --msvs_version=2013
-
-  # 以下は、プロジェクトに合わせてください
-  # 例として、パッケージ管理に bower, ビルドツールに grunt を用いている場合
-
-  # Install build tools
-  - npm install -g grunt-cli bower
-  - grunt --version
-  - bower --version
-
-  # Install bower packages
-  - bower install
-
-  # Build
-  - grunt build
-
-test_script:
-# テスト用のコマンドを指定します
-  - npm test
-
+# Test against these versions of Io.js and Node.js.
 environment:
   matrix:
-    - nodejs_version: "0.8"
-    - nodejs_version: "0.10"
-    - nodejs_version: "0.12"
-    - nodejs_version: "4"
-    - nodejs_version: "5"
+  # node.js
     - nodejs_version: "6"
     - nodejs_version: "7"
     - nodejs_version: "8"
 
-init:
-# git clone の際の改行を変換しないようにします
-  - git config --global core.autocrlf false
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node 0.STABLE.latest
+  - ps: Install-Product node $env:nodejs_version
+  - IF %nodejs_version% LSS 4 npm -g install npm@2
+  - set PATH=%APPDATA%\npm;%PATH%
+  # Typical npm stuff.
+  - npm install
+  - npm run rebuild-tests
 
-branches:
-# ビルドするブランチを制限する場合に記述します
-  only:
-    - master
-  except:
-    - gh-pages
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
+  - IF %nodejs_version% LSS 1 (npm test) ELSE (IF %nodejs_version% LSS 4 (iojs node_modules\tap\bin\tap.js --gc test/js/*-test.js) ELSE (node node_modules\tap\bin\tap.js --gc test/js/*-test.js))
 
+# Don't actually build.
 build: off
-deploy: off
+
+# Set build version format here instead of in the admin panel.
+version: "{build}"
