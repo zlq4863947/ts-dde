@@ -1,5 +1,15 @@
 /src
 /log
 /node_modules
-/npm-debug.log
+/dist/**/*.test.js
+/dist/**/*.test.d.ts
+npm-debug.log
 .idea
+.nonignore
+.gutignore
+.git
+appveyor.yml
+package-lock.json
+tsconfig.development.json
+tsconfig.json
+tslint.json
