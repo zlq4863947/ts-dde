@@ -5,8 +5,8 @@
 /dist/**/*.test.d.ts
 npm-debug.log
 .idea
-.nonignore
-.gutignore
+.npmignore
+.gitignore
 .git
 appveyor.yml
 package-lock.json
