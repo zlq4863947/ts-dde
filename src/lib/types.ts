@@ -61,6 +61,6 @@ export interface ClientInput {
     /**
      * [主题]:['数据项1', '数据项2']
      */
-    [topic: string]: string[]
+    [topic: string]: string[]|null
   }
 }

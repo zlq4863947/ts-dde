@@ -15,7 +15,33 @@ npm install ts-dde --save
 
 ### Client
 
-异步监听advise获取service-topic-item三级命名结构数据:
+异步监听advise获取service-topic-item三级命名结构数据。
+
+* 单个主题：
+
+```javascript
+import { Client } from 'ts-dde';
+
+const client = new Client({
+    myapp: {
+        mytopic1: ['myitem1', 'myitem2']
+    }
+});
+
+client.on('advise', (service, topic, item, text) => {
+  console.log('OnAdvise: '
+    + 'Service: ' + service
+    + ', Topic: ' + topic
+    + ', Item: ' + item
+    + ', Text: ' + text);
+});
+
+client.connect();
+
+client.startAdvise();
+```
+
+* 多个主题：
 
 ```javascript
 import { Client } from 'ts-dde';
@@ -37,7 +63,7 @@ client.on('advise', (service, topic, item, text) => {
 
 client.connect();
 
-client.startAdvise('myitem');
+client.startAdvise();
 ```
 
 ### Server
