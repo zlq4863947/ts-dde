@@ -5,7 +5,7 @@ const testStart = async (done: any) => {
 
   const server = new Server('myapp');
 
-  const id = setInterval(function() {
+  const id = setInterval(function () {
     server.advise('*', '*');
   }, 1000);
 
@@ -38,7 +38,7 @@ const testStart = async (done: any) => {
   assert(server.isRegistered());
 
   // 等待4秒
-  await new Promise(resolve => setTimeout(resolve, 4000));
+  await new Promise(resolve => setTimeout(resolve, 6000));
 
   // 断开连接
   server.disconnect();
