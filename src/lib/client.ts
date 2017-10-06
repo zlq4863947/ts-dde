@@ -1,4 +1,4 @@
-import { ClientData, ClientInput } from './types';
+import { ClientData, DdeType } from './types';
 import { EventEmitter } from 'events';
 import * as path from 'path';
 const edge = require('edge-js');
@@ -27,7 +27,7 @@ export class Client extends EventEmitter {
    * 客户端构造函数
    * @param input 入力参数
    */
-  constructor(input: ClientInput) {
+  constructor(input: DdeType) {
     super();
     const opts = {
       services: input,
