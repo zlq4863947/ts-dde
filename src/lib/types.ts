@@ -49,11 +49,11 @@ export interface ClientData extends DdeData {
 }
 
 /**
- * 客户端入力参数
+ * 三层构架数据结构
  *
  * @interface
  */
-export interface ClientInput {
+export interface DdeType {
   /**
    * 服务名
    */
