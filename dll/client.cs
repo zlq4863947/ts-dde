@@ -70,7 +70,7 @@ namespace NodeDde
                     ? (Func<object, Task<object>>)opts["callback"] : (o) => null;
 
                 var results = new List<IDictionary<string, object>>();
-
+/*
 				string item = null;
 				if (opts.ContainsKey("item"))
 				{
@@ -149,9 +149,9 @@ namespace NodeDde
                         case "IsPaused":
                             return client.IsPaused;
                     }
-                }
+                } */
 
-                if (clients.Count >= 1)
+                if (clients.Count != 0)
                 {
                     switch (method)
                     {
