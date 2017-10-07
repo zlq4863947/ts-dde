@@ -40,11 +40,6 @@ export class Client extends EventEmitter {
         }
       }
     }
-    const topicKeys = Object.keys(input[Object.keys(input)[0]]);
-    if (topicKeys.length === 1) {
-      // 只有一个主题时，赋值
-      this.item = topicKeys[0];
-    }
     this._invoke = getInvoker(opts, true);
   }
 
@@ -73,9 +68,6 @@ export class Client extends EventEmitter {
   };
 
   poke = (item: string | null, data: string, timeout: number) => {
-    if (item) {
-      this.item = item;
-    }
     this._invoke({
       method: 'Poke',
       item: this.item || '',
@@ -85,9 +77,6 @@ export class Client extends EventEmitter {
   };
 
   request = (item: string | null, format: string, timeout: number) => {
-    if (item) {
-      this.item = item;
-    }
     return this._invoke({
       method: 'Request',
       item: this.item || '',
@@ -96,10 +85,7 @@ export class Client extends EventEmitter {
     }, true);
   };
 
-  startAdvise = (item?: string, format?: string, hot?: boolean, timeout?: number) => {
-    if (item) {
-      this.item = item;
-    }
+  startAdvise = (item?: string[], format?: string, hot?: boolean, timeout?: number) => {
     this._invoke({
       method: 'StartAdvise',
       item: this.item || '',
@@ -109,10 +95,7 @@ export class Client extends EventEmitter {
     }, true);
   };
 
-  stopAdvise = (item?: string, timeout?: number) => {
-    if (item) {
-      this.item = item;
-    }
+  stopAdvise = (item?: string[], timeout?: number) => {
     this._invoke({
       method: 'StopAdvise',
       item: this.item || '',
