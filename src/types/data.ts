@@ -7,25 +7,25 @@ export interface DdeData {
   /**
    * 服务
    */
-  service: string,
+  service: string;
   /**
    * 主题
    */
-  topic: string,
+  topic: string;
   /**
    * 数据项
    */
-  item: string,
+  item: string;
   /**
    * 数据格式，1：CF_TEXT
    */
-  format: string,
+  format: string;
   /**
    * 数据
    */
-  data: string[],
+  data: string[];
 
-  command: string
+  command: string;
 }
 
 /**
@@ -37,15 +37,15 @@ export interface ClientData extends DdeData {
   /**
    * 内容？
    */
-  text: string,
+  text: string;
   /**
    * 是否已被释放
    */
-  isDisposed: boolean,
+  isDisposed: boolean;
   /**
    * 服务端是否初始化
    */
-  isServerInitiated: boolean
+  isServerInitiated: boolean;
 }
 
 /**
@@ -61,6 +61,6 @@ export interface DdeType {
     /**
      * [主题]:['数据项1', '数据项2']
      */
-    [topic: string]: string[]
-  }
+    [topic: string]: string[];
+  };
 }

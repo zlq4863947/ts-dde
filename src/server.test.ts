@@ -1,11 +1,11 @@
+/*import * as assert from 'power-assert';
+
 import { Server } from '../';
-import * as assert from 'power-assert';
 
 const testStart = async (done: any) => {
-
   const server = new Server('myapp');
 
-  const id = setInterval(function () {
+  const id = setInterval(function() {
     server.advise('*', '*');
   }, 1000);
 
@@ -18,12 +18,7 @@ const testStart = async (done: any) => {
   });
   // 绑定通知事件
   server.on('advise', (topic, item, format) => {
-    console.log(
-      'OnAdvise(通知事件): ',
-      'Topic(主题): ' + topic,
-      ', Item(数据项): ' + item,
-      ', Format: ' + format
-    );
+    console.log('OnAdvise(通知事件): ', 'Topic(主题): ' + topic, ', Item(数据项): ' + item, ', Format: ' + format);
   });
 
   let i = 0;
@@ -38,7 +33,7 @@ const testStart = async (done: any) => {
   assert(server.isRegistered());
 
   // 等待4秒
-  await new Promise(resolve => setTimeout(resolve, 6000));
+  await new Promise((resolve) => setTimeout(resolve, 6000));
 
   // 断开连接
   server.disconnect();
@@ -53,9 +48,8 @@ const testStart = async (done: any) => {
 };
 
 describe('DDE服务端测试', () => {
-  it('测试是否启动成功', function (done) {
+  it('测试是否启动成功', function(done) {
     this.timeout(20000);
     testStart(done);
   });
-});
-
+});*/

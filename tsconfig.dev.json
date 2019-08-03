@@ -3,6 +3,6 @@
   "compilerOptions": {
     "watch": true,
     "declaration": false,
-    "sourceMap": true
+    "sourceMap": false
   }
 }

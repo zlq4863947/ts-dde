@@ -1,36 +1,53 @@
 {
   "name": "ts-dde",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Dynamic Data Exchange (DDE) 通信组件",
+  "license": "GPL-3.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "bdd": "yarn jest --watch --onlyChanged",
+    "ci:build-check": "yarn run tsc:app --noEmit",
+    "format": "yarn format:ts",
+    "format:ts": "yarn format:ts:import && prettier --config .prettierrc --write 'src/**/*.ts'",
+    "format:ts:import": "import-sort --write 'src/**/*.ts'",
+    "jest": "jest -c jest.config.js",
+    "lint": "yarn lint:ts",
+    "lint:ts": "tslint -p tsconfig.json -c tslint.json",
+    "prepublishOnly": "yarn build:prod",
+    "test": "yarn jest --runInBand",
+    "tsc:app": "tsc -p tsconfig.app.json",
+    "tsc:dev": "tsc -p tsconfig.dev.json"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/zlq4863947/ts-dde"
   },
-  "license": "GPL3",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "scripts": {
-    "rm": "rimraf dist",
-    "tsc": "npm run rm && tsc -p tsconfig.development.json",
-    "tslint": "tslint --project ./tslint.json",
-    "test": "mocha dist/**/*.test.js --timeout 3000 --require intelli-espower-loader",
-    "prepare": "npm run rm && tsc -p tsconfig.json"
+  "author": "zlq4863947@gmail.com",
+  "bugs": {
+    "url": "https://github.com/zlq4863947/ts-dde/issues"
   },
+  "homepage": "https://github.com/zlq4863947/ts-dde#readme",
   "dependencies": {
-    "edge-js": "^8.2.5"
+    "edge-js": "^12.3.1"
   },
   "devDependencies": {
-    "@types/config": "0.0.32",
-    "@types/mocha": "^2.2.41",
-    "@types/node": "^8.0.31",
-    "@types/power-assert": "^1.4.29",
-    "config": "^1.26.1",
-    "intelli-espower-loader": "^1.0.1",
-    "mocha": "^3.5.0",
-    "power-assert": "^1.4.4",
-    "rimraf": "^2.6.2",
-    "ts-node": "^3.3.0",
-    "tslint": "^5.6.0",
-    "typescript": "^2.4.2"
+    "@types/jest": "^24.0.16",
+    "@types/node": "^12.6.9",
+    "import-sort": "^6.0.0",
+    "import-sort-cli": "^6.0.0",
+    "import-sort-parser-typescript": "^6.0.0",
+    "import-sort-style-module-alias": "^1.0.4",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "tsconfig-paths": "^3.8.0",
+    "tslint": "^5.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.5.3",
+    "vrsource-tslint-rules": "^6.0.0",
+    "yarn": "^1.17.3"
   }
 }
