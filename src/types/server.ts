@@ -4,6 +4,7 @@
   // 数据项
   item: string;
  */
+
 import { DdeData } from './data';
 
 export interface DdeServerOotions {

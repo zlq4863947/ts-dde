@@ -59,5 +59,4 @@ typings/
 
 .history
 package-lock.json
-.vscode
 .idea

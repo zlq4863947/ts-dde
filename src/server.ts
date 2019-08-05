@@ -13,21 +13,21 @@ export class DdeServer {
    * 注册服务
    */
   register() {
-    this.invoker({ method: 'Register' }, true);
+    return this.invoker({ method: 'Register' }, true);
   }
 
   /**
    * 注销服务
    */
   unregister() {
-    this.invoker({ method: 'Unregister' }, true);
+    return this.invoker({ method: 'Unregister' }, true);
   }
 
   /**
    * 通知所有客户端指定主题名称和项目名称对的数据已更改
    */
   advise(topic: string, item: string) {
-    this.invoker(
+    return this.invoker(
       {
         method: 'Advise',
         topic,
@@ -41,41 +41,41 @@ export class DdeServer {
    * 断开连接
    */
   disconnect() {
-    this.invoker({ method: 'Disconnect' }, true);
+    return this.invoker({ method: 'Disconnect' }, true);
   }
 
   /**
    * 暂停连接
    */
   pause() {
-    this.invoker({ method: 'Pause' }, true);
+    return this.invoker({ method: 'Pause' }, true);
   }
 
   /**
    * 恢复连接
    */
   resume() {
-    this.invoker({ method: 'Resume' }, true);
+    return this.invoker({ method: 'Resume' }, true);
   }
 
   /**
    * 释放此实例持有的所有资源
    */
   dispose() {
-    this.invoker({ method: 'Dispose' }, true);
+    return this.invoker({ method: 'Dispose' }, true);
   }
 
   /**
    * 获取服务名称
    */
-  service() {
-    this.invoker({ method: 'Service' }, true);
+  service(): string {
+    return this.invoker({ method: 'Service' }, true);
   }
 
   /**
    * 是否已注册
    */
-  isRegistered() {
-    this.invoker({ method: 'IsRegistered' }, true);
+  isRegistered(): boolean {
+    return this.invoker({ method: 'IsRegistered' }, true);
   }
 }
