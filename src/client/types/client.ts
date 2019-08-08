@@ -3,6 +3,7 @@
  *
  * @interface
  */
+
 import { DdeData } from '../../server';
 
 export interface ClientDdeData extends DdeData {

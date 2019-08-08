@@ -20,6 +20,10 @@ export interface DdeClientOptions {
 
 export class DdeClient extends EventEmitter {
   private readonly invoke: any;
+  private readonly format = 1;
+  private readonly hot = true;
+  // 十分钟超时
+  private readonly timeout = 600000;
 
   constructor(readonly options: DdeClientOptions) {
     super();
@@ -58,14 +62,13 @@ export class DdeClient extends EventEmitter {
    * 向服务器发送命令
    *
    * @param command 命令内容
-   * @param timeout 等待响应的时间（以毫秒为单位）
    */
-  execute(command: string, timeout: number): void {
+  execute(command: string): void {
     return this.invoke(
       {
         method: 'Execute',
         command: command,
-        timeout: timeout,
+        timeout: this.timeout,
       },
       true,
     );
@@ -76,15 +79,14 @@ export class DdeClient extends EventEmitter {
    *
    * @param item 项目名称
    * @param data 要发送的数据
-   * @param timeout 等待响应的时间（以毫秒为单位）
    */
-  poke(item: string | null, data: string, timeout: number): void {
+  poke(item: string | null, data: string): void {
     return this.invoke(
       {
         method: 'Poke',
         item: item || '',
         data: data,
-        timeout: timeout,
+        timeout: this.timeout,
       },
       true,
     );
@@ -94,16 +96,14 @@ export class DdeClient extends EventEmitter {
    * 请求指定项目名称的数据
    *
    * @param item 项目名称
-   * @param format 要返回的数据的格式
-   * @param timeout 等待响应的时间（以毫秒为单位）
    */
-  request(item: string | null, format: string, timeout: number): string {
+  request(item: string | null): string {
     return this.invoke(
       {
         method: 'Request',
         item: item || '',
-        format: format,
-        timeout: timeout,
+        format: this.format,
+        timeout: this.timeout,
       },
       true,
     );
@@ -113,18 +113,15 @@ export class DdeClient extends EventEmitter {
    * 开启指定项目名称的会话
    *
    * @param item 项目名称列表
-   * @param format 返回的数据的格式
-   * @param hot 是否为热连接
-   * @param timeout 等待响应的时间（以毫秒为单位）
    */
-  startAdvise(item?: string[], format?: string, hot?: boolean, timeout?: number): void {
+  startAdvise(item?: string[]): void {
     return this.invoke(
       {
         method: 'StartAdvise',
         item: item || '',
-        format: format,
-        hot: hot,
-        timeout: timeout,
+        format: this.format,
+        hot: this.hot,
+        timeout: this.timeout,
       },
       true,
     );
@@ -134,14 +131,13 @@ export class DdeClient extends EventEmitter {
    * 关闭指定项目名称的会话
    *
    * @param item 项目名称列表
-   * @param timeout 等待响应的时间（以毫秒为单位）
    */
-  stopAdvise(item?: string[], timeout?: number): void {
+  stopAdvise(item?: string[]): void {
     return this.invoke(
       {
         method: 'StopAdvise',
         item: item,
-        timeout: timeout,
+        timeout: this.timeout,
       },
       true,
     );
@@ -177,7 +173,7 @@ export class DdeClient extends EventEmitter {
         method: 'BeginPoke',
         item: item,
         data: data,
-        format: format,
+        format: this.format,
       },
       oncomplete,
     );
@@ -195,7 +191,7 @@ export class DdeClient extends EventEmitter {
       {
         method: 'BeginRequest',
         item: item,
-        format: format,
+        format: this.format,
       },
       oncomplete,
     );
@@ -214,8 +210,8 @@ export class DdeClient extends EventEmitter {
       {
         method: 'BeginStartAdvise',
         item: item,
-        format: format,
-        hot: hot,
+        format: this.format,
+        hot: this.hot,
       },
       oncomplete,
     );

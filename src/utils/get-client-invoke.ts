@@ -3,7 +3,7 @@ import * as path from 'path';
 import { ClientDdeData, DdeClient, DdeClientPoyload } from '../client';
 
 const edge = require('edge-js');
-const modelPath = path.join(path.dirname(__filename), '../dll');
+const modelPath = path.join(path.dirname(__filename), '../../dll');
 
 function getClientInvokerFunc() {
   return edge.func({

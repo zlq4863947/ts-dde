@@ -16,6 +16,8 @@
     "lint:ts": "tslint -p tsconfig.json -c tslint.json",
     "prepublishOnly": "yarn build:prod",
     "test": "yarn jest --runInBand",
+    "test:server": "ts-node -r tsconfig-paths/register test/server.ts",
+    "test:client": "ts-node -r tsconfig-paths/register test/client.ts",
     "tsc:app": "tsc -p tsconfig.app.json",
     "tsc:dev": "tsc -p tsconfig.dev.json"
   },

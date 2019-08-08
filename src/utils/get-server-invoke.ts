@@ -1,10 +1,9 @@
 import * as path from 'path';
 
-import { DdeServer } from '../server';
-import { DdeData, DdeServerPoyload } from '../types';
+import { DdeData, DdeServer, DdeServerPoyload } from '../server';
 
 const edge = require('edge-js');
-const modelPath = path.join(path.dirname(__filename), '../dll');
+const modelPath = path.join(path.dirname(__filename), '../../dll');
 
 function getServerInvokerFunc(): (options: DdeServerPoyload, isRun: boolean) => any {
   return edge.func({
