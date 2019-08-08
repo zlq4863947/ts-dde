@@ -1,17 +1,38 @@
-/*
-  // 主题
-  topic: string;
-  // 数据项
-  item: string;
+/**
+ * DDE数据结构(三级命名)
+ *
+ * @interface
  */
+export interface DdeData {
+  /**
+   * 服务
+   */
+  service: string;
+  /**
+   * 主题
+   */
+  topic: string;
+  /**
+   * 数据项
+   */
+  item: string;
+  /**
+   * 数据格式，1：CF_TEXT
+   */
+  format: string;
+  /**
+   * 数据
+   */
+  data: string[];
 
-import { DdeData } from './data';
+  command: string;
+}
 
-export interface DdeServerOotions {
+export interface IDdeServer {
   /**
    * 客户端尝试建立会话事件
    */
-  onBeforeConnect: () => void;
+  onBeforeConnect: (topic: string) => void;
   /**
    * 客户端成功建立会话事件
    * @param service 服务名称

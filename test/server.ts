@@ -1,24 +1,26 @@
-/*import * as assert from 'power-assert';
+import { DdeServer } from '../src/server';
+import { sleep } from '../src/utils';
 
-import { Server } from '../';
-
-const testStart = async (done: any) => {
-  const server = new Server('myapp');
-
-  const id = setInterval(function() {
+async function main(): Promise<void> {
+  const server = new DdeServer('myapp');
+  const id = setInterval(function () {
     server.advise('*', '*');
   }, 1000);
-
   console.log('服务器信息：', server.service());
   console.log('是否已注册：', server.isRegistered());
-  assert(!server.isRegistered());
+
   // 绑定断开事件
   server.on('disconnect', (service, topic) => {
     console.log('OnDisconnect: ', 'Service: ' + service, ', Topic: ' + topic);
   });
   // 绑定通知事件
   server.on('advise', (topic, item, format) => {
-    console.log('OnAdvise(通知事件): ', 'Topic(主题): ' + topic, ', Item(数据项): ' + item, ', Format: ' + format);
+    console.log(
+      'OnAdvise(通知事件): ',
+      'Topic(主题): ' + topic,
+      ', Item(数据项): ' + item,
+      ', Format: ' + format
+    );
   });
 
   let i = 0;
@@ -30,10 +32,8 @@ const testStart = async (done: any) => {
   server.register();
   // 是否注册成功
   console.log('是否注册成功：', server.isRegistered());
-  assert(server.isRegistered());
 
-  // 等待4秒
-  await new Promise((resolve) => setTimeout(resolve, 6000));
+  await sleep(8000);
 
   // 断开连接
   server.disconnect();
@@ -43,13 +43,9 @@ const testStart = async (done: any) => {
   server.dispose();
 
   clearInterval(id);
+}
 
-  done();
-};
-
-describe('DDE服务端测试', () => {
-  it('测试是否启动成功', function(done) {
-    this.timeout(20000);
-    testStart(done);
-  });
-});*/
+main().catch(async (e) => {
+  console.error('server run error:', e.message)
+  process.exit(1);
+});
