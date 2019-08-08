@@ -1,5 +1,5 @@
-import { DdeServer } from './server';
-import { sleep } from './utils';
+import { sleep } from '../utils';
+import { DdeServer } from './index';
 
 describe('DdeServer', () => {
   it('should start dde server', async () => {

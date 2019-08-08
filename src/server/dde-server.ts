@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import { getServerInvoke } from './utils';
+import { getServerInvoke } from '../utils';
 
 export class DdeServer extends EventEmitter {
   private readonly invoke: any;
@@ -8,8 +8,17 @@ export class DdeServer extends EventEmitter {
   constructor(readonly serviceName: string) {
     super();
     this.invoke = getServerInvoke(this);
-    // this.addListener('')
   }
+
+  onBeforeConnect = (topic?: string) => true;
+  onAfterConnect = (service: string, topic: string) => void 0;
+  onDisconnect = (service: string, topic: string) => void 0;
+  onStartAdvise = (...args: any[]) => true;
+  onStopAdvise = (...args: any[]) => void 0;
+  onExecute = (...args: any[]) => void 0;
+  onPoke = (...args: any[]) => void 0;
+  onRequest = (...args: any[]) => '';
+  onAdvise = (...args: any[]) => '';
 
   /**
    * 注册服务

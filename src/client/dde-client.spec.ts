@@ -1,6 +1,6 @@
-import { DdeClient } from './client';
-import { DdeServer } from './server';
-import { sleep } from './utils';
+import { DdeServer } from '../server';
+import { sleep } from '../utils';
+import { DdeClient } from './dde-client';
 
 describe('DdeClient', () => {
   let server: DdeServer;

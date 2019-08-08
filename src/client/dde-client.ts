@@ -1,4 +1,6 @@
-import { getClientInvoke } from './utils';
+import { EventEmitter } from 'events';
+
+import { getClientInvoke } from '../utils';
 
 export interface IAsyncResult {
   [attr: string]: any;
@@ -16,10 +18,11 @@ export interface DdeClientOptions {
   };
 }
 
-export class DdeClient {
+export class DdeClient extends EventEmitter {
   private readonly invoke: any;
 
   constructor(readonly options: DdeClientOptions) {
+    super();
     this.invoke = getClientInvoke(this);
   }
 

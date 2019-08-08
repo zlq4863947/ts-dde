@@ -1,6 +1,26 @@
-import { DdeData } from './data';
+/**
+ * 客户端DDE数据结构(三级命名)
+ *
+ * @interface
+ */
+import { DdeData } from '../../server';
 
-export interface DdeServerOotions {
+export interface ClientDdeData extends DdeData {
+  /**
+   * 内容？
+   */
+  text: string;
+  /**
+   * 是否已被释放
+   */
+  isDisposed: boolean;
+  /**
+   * 服务端是否初始化
+   */
+  isServerInitiated: boolean;
+}
+
+export interface DdeClientOotions {
   /**
    * 客户端尝试建立会话事件
    */
@@ -69,7 +89,7 @@ export interface DdeServerOotions {
   onAdvise: (service: string, topic: string, item: string) => void;
 }
 
-export interface DdeServerPoyloadCallbacks {
+export interface DdeClientPoyloadCallbacks {
   /**
    * 客户端尝试建立会话事件
    */
@@ -108,7 +128,24 @@ export interface DdeServerPoyloadCallbacks {
   OnAdvise: (ddeData: DdeData, cb: (func: any, task: any) => void) => void;
 }
 
-export interface DdeServerPoyload {
-  service: string;
-  callbacks: DdeServerPoyloadCallbacks;
+/**
+ * 三层构架数据结构
+ *
+ * @interface
+ */
+export interface DdeClientPoyloadServices {
+  /**
+   * 服务名
+   */
+  [service: string]: {
+    /**
+     * [主题]:['数据项1', '数据项2']
+     */
+    [topic: string]: string[];
+  };
+}
+
+export interface DdeClientPoyload {
+  services: DdeClientPoyloadServices;
+  callbacks: DdeClientPoyloadCallbacks;
 }
