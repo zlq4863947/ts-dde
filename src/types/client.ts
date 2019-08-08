@@ -1,6 +1,6 @@
-import { DdeData } from './data';
+import { DdeData, DdeType } from './data';
 
-export interface DdeServerOotions {
+export interface DdeClientOotions {
   /**
    * 客户端尝试建立会话事件
    */
@@ -69,7 +69,7 @@ export interface DdeServerOotions {
   onAdvise: (service: string, topic: string, item: string) => void;
 }
 
-export interface DdeServerPoyloadCallbacks {
+export interface DdeClientPoyloadCallbacks {
   /**
    * 客户端尝试建立会话事件
    */
@@ -108,7 +108,7 @@ export interface DdeServerPoyloadCallbacks {
   OnAdvise: (ddeData: DdeData, cb: (func: any, task: any) => void) => void;
 }
 
-export interface DdeServerPoyload {
-  service: string;
-  callbacks: DdeServerPoyloadCallbacks;
+export interface DdeClientPoyload {
+  services: DdeType;
+  callbacks: DdeClientPoyloadCallbacks;
 }

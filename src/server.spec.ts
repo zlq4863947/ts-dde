@@ -5,6 +5,20 @@ describe('DdeServer', () => {
   it('should start dde server', async () => {
     const server = new DdeServer('myServ');
 
+    console.log(server.eventNames());
+
+    (server as any).onBeforeConnect = (a: any, b: any, c: any) => {
+      console.log('onBeforeConnect-z:', a, b, c);
+    };
+    server.on('some_event', (a, b, c) => {
+      console.log('beforeConnect-z:', a, b, c);
+    });
+    server.on('disconnect', (a, b, c) => {
+      console.log('disconnect:', a, b, c);
+    });
+    server.on('beforeConnect', (a, b, c) => {
+      console.log('bc:', a, b, c);
+    });
     const id = setInterval(function() {
       server.advise('*', '*');
     }, 1000);
