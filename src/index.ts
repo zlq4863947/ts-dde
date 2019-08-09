@@ -1,3 +1,3 @@
-export * from './lib/server';
-export * from './lib/client';
-export { DdeType } from './lib/types';
+export * from './server';
+export * from './client';
+export * from './utils';

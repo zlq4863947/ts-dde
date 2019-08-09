@@ -1,15 +1,26 @@
 {
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "es2018",
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
-    "types": ["node", "mocha"],
+    "types": ["node", "jest"],
     "typeRoots": ["./node_modules/@types"],
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "declaration": true
+    "rootDir": "./",
+    "outDir": "dist",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "sourceMap": true
   },
-  "include": ["./src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }

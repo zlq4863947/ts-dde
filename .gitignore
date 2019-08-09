@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Runtime data
+dist
 pids
 *.pid
 *.seed
@@ -57,3 +58,6 @@ typings/
 # dotenv environment variables file
 .env
 
+.history
+package-lock.json
+.idea
