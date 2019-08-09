@@ -3,8 +3,6 @@ configuration:
   - Release
 
 platform:
-  - BuildChm
-  - Win32
   - x64
 
 environment:
@@ -12,6 +10,7 @@ environment:
     - node_version: '12.3.1'
     - node_version: '11.3.0'
     - node_version: '10.14.0'
+
 branches:
   only:
     - master
@@ -47,7 +46,8 @@ install:
   - IF %nodejs_version% LSS 4 npm -g install npm@2
   - set PATH=%APPDATA%\npm;%PATH%
   # Typical yarn stuff.
-  - yarn install --frozen-lockfile
+  - yarn
+  - node --version
 
 # Post-install test scripts.
 test_script:
