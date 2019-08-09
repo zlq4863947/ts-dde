@@ -1,6 +1,6 @@
 {
   "name": "ts-dde",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dynamic Data Exchange (DDE) 通信组件",
   "license": "GPL-3.0",
   "main": "dist/index.js",
@@ -10,7 +10,8 @@
     "build:prod": "yarn build:preprocess && yarn tsc:app",
     "build:preprocess": "rimraf dist",
     "ci:build-check": "yarn run tsc:app --noEmit",
-    "format": "yarn format:ts",
+    "format": "yarn format:ts && yarn format:md",
+    "format:md": "prettier --config .prettierrc --write \"./README*.md\" --parser markdown",
     "format:ts": "yarn format:ts:import && prettier --config .prettierrc --write \"src/**/*.ts\"",
     "format:ts:import": "import-sort --write \"src/**/*.ts\"",
     "jest": "jest -c jest.config.js",
@@ -24,6 +25,11 @@
     "tsc:app": "tsc -p tsconfig.app.json",
     "tsc:dev": "tsc -p tsconfig.dev.json"
   },
+  "keywords": [
+    "dde",
+    "DDE",
+    "Dynamic Data Exchange"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/zlq4863947/ts-dde"
