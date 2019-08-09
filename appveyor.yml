@@ -1,4 +1,11 @@
 # http://www.appveyor.com/docs/appveyor-yml
+configuration:
+  - Release
+
+platform:
+  - BuildChm
+  - Win32
+  - x64
 
 environment:
   matrix:
@@ -41,6 +48,10 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
   # Typical yarn stuff.
   - yarn install --frozen-lockfile
+
+# to run our custom scripts instead of automatic MSBuild
+build_script:
+  - cmd: dotnet restore
 
 # Post-install test scripts.
 test_script:
