@@ -49,10 +49,6 @@ install:
   # Typical yarn stuff.
   - yarn install --frozen-lockfile
 
-# to run our custom scripts instead of automatic MSBuild
-build_script:
-  - cmd: dotnet restore
-
 # Post-install test scripts.
 test_script:
   - yarn test
