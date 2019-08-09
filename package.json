@@ -39,9 +39,6 @@
     "url": "https://github.com/zlq4863947/ts-dde/issues"
   },
   "homepage": "https://github.com/zlq4863947/ts-dde#readme",
-  "testMatch": [
-    "<rootDir>/**/*.spec.ts"
-  ],
   "dependencies": {
     "edge-js": "^12.3.1"
   },

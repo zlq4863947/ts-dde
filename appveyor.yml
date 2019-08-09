@@ -47,12 +47,12 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
   # Typical yarn stuff.
   - yarn
-  - node --version
 
 # Post-install test scripts.
 test_script:
+  - node --version
   - yarn test
-  
+
 # Don't actually build.
 build: off
 
