@@ -5,7 +5,7 @@ import { ClientDdeData, DdeClient, DdeClientPoyload } from '../client';
 const edge = require('edge-js');
 const modelPath = path.join(path.dirname(__filename), '../../dll');
 
-function getClientInvokerFunc() {
+function getClientInvokerFunc(): (options: DdeClientPoyload, isRun: boolean) => any {
   return edge.func({
     source: modelPath + '/client.cs',
     references: [modelPath + '/NDde.dll'],
@@ -18,7 +18,7 @@ export function getClientInvoke(ddeClient: DdeClient): (options: DdeClientPoyloa
   const invokerFunc = getClientInvokerFunc();
   return invokerFunc(
     {
-      services: ddeClient.options,
+      services: ddeClient.options.services,
       callbacks: {
         OnDisconnected: (ddeData: ClientDdeData) => {
           ddeClient.emit('disconnected', ddeData.service, ddeData.topic, ddeData.isDisposed, ddeData.isServerInitiated);

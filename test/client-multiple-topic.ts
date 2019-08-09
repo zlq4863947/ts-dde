@@ -6,6 +6,7 @@ async function main(): Promise<void> {
     services: {
       myapp: {
         mytopic1: ['myitem1', 'myitem2'],
+        mytopic2: ['myitem1', 'まいあいてむ２']
       },
     },
   });

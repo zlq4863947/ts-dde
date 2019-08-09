@@ -1,12 +1,14 @@
 {
   "name": "ts-dde",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "description": "Dynamic Data Exchange (DDE) 通信组件",
   "license": "GPL-3.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "bdd": "yarn jest --watch --onlyChanged",
+    "build:prod": "yarn build:preprocess && yarn tsc:app",
+    "build:preprocess": "rimraf dist",
     "ci:build-check": "yarn run tsc:app --noEmit",
     "format": "yarn format:ts",
     "format:ts": "yarn format:ts:import && prettier --config .prettierrc --write \"src/**/*.ts\"",
@@ -18,6 +20,7 @@
     "test": "yarn jest --runInBand",
     "test:server": "ts-node -r tsconfig-paths/register test/server.ts",
     "test:client": "ts-node -r tsconfig-paths/register test/client.ts",
+    "test:client:multi": "ts-node -r tsconfig-paths/register test/client.ts",
     "tsc:app": "tsc -p tsconfig.app.json",
     "tsc:dev": "tsc -p tsconfig.dev.json"
   },

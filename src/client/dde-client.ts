@@ -1,32 +1,26 @@
 import { EventEmitter } from 'events';
 
 import { getClientInvoke } from '../utils';
-
-export interface IAsyncResult {
-  [attr: string]: any;
-}
-
-export interface DdeClientOptions {
-  /**
-   * 服务名
-   */
-  [service: string]: {
-    /**
-     * [主题]:['数据项1', '数据项2']
-     */
-    [topic: string]: string[];
-  };
-}
+import { DdeClientOptions, IAsyncResult } from './types';
 
 export class DdeClient extends EventEmitter {
   private readonly invoke: any;
-  private readonly format = 1;
-  private readonly hot = true;
+  format = 1;
+  hot = true;
   // 十分钟超时
-  private readonly timeout = 600000;
+  timeout = 600000;
 
   constructor(readonly options: DdeClientOptions) {
     super();
+    if (options.format !== undefined) {
+      this.format = options.format;
+    }
+    if (options.hot !== undefined) {
+      this.hot = options.hot;
+    }
+    if (options.timeout !== undefined) {
+      this.timeout = options.timeout;
+    }
     this.invoke = getClientInvoke(this);
   }
 

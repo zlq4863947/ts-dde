@@ -14,7 +14,7 @@ function getServerInvokerFunc(): (options: DdeServerPoyload, isRun: boolean) => 
   });
 }
 
-export function getServerInvoke(ddeServ: DdeServer): any {
+export function getServerInvoke(ddeServ: DdeServer): (options: DdeServerPoyload, isRun: boolean) => any {
   const invokerFunc = getServerInvokerFunc();
   return invokerFunc(
     {
