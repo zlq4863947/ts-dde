@@ -5,9 +5,9 @@ import { DdeData } from '../server';
  *
  * @interface
  */
-export interface ClientDdeData extends DdeData {
+export interface DdeClientData extends DdeData {
   /**
-   * 内容？
+   * 内容
    */
   text: string;
   /**
@@ -41,11 +41,11 @@ export interface DdeClientPoyloadCallbacks {
   /**
    * 断开连接事件
    */
-  OnDisconnected: (ddeData: ClientDdeData) => void;
+  OnDisconnected: (ddeData: DdeClientData) => void;
   /**
    * 当客户端尝试订阅数据时调用此方法
    */
-  OnAdvise: (ddeData: ClientDdeData, cb: (func: any, task: any) => void) => void;
+  OnAdvise: (ddeData: DdeClientData, cb: (func: any, task: any) => void) => void;
 }
 
 /**

@@ -3,8 +3,10 @@ import { DdeClient } from './dde-client';
 describe('DdeClient', () => {
   it('should start dde DdeClient', () => {
     const client = new DdeClient({
-      myapp: {
-        mytopic1: ['myitem1', 'myitem2'],
+      services: {
+        myapp: {
+          mytopic1: ['myitem1', 'myitem2'],
+        },
       },
     });
     console.log('service: ', client.service());

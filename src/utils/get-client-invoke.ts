@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import { ClientDdeData, DdeClient, DdeClientPoyload } from '../client';
+import { DdeClient, DdeClientData, DdeClientPoyload } from '../client';
 
 const edge = require('edge-js');
 const modelPath = path.join(path.dirname(__filename), '../../dll');
@@ -20,11 +20,11 @@ export function getClientInvoke(ddeClient: DdeClient): (options: DdeClientPoyloa
     {
       services: ddeClient.options.services,
       callbacks: {
-        OnDisconnected: (ddeData: ClientDdeData) => {
-          ddeClient.emit('disconnected', ddeData.service, ddeData.topic, ddeData.isDisposed, ddeData.isServerInitiated);
+        OnDisconnected: (ddeData: DdeClientData) => {
+          ddeClient.emit('disconnected', ddeData);
         },
-        OnAdvise: (ddeData: ClientDdeData, cb: (func: any, task: any) => void) => {
-          ddeClient.emit('advise', ddeData.service, ddeData.topic, ddeData.item, ddeData.text);
+        OnAdvise: (ddeData: DdeClientData) => {
+          ddeClient.emit('advise', ddeData);
         },
       },
     },

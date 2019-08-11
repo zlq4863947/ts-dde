@@ -1,7 +1,3 @@
-// Node-dde
-// (c) 2013 thunder9 (https://github.com/thunder9)
-// Node-dde may be freely distributed under the MIT license.
-
 using NDde.Server;
 using System;
 using System.Collections.Generic;

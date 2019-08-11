@@ -22,12 +22,21 @@ async function main(): Promise<void> {
   client.connect();
   console.log('isConnected: ', client.isConnected());
 
-  client.on('disconnected', function(service, topic, isDisposed, isServerInitiated) {
-    console.log('Service: ' + service + ', Topic: ' + topic + ', IsDisposed: ' + isDisposed + ', IsServerInitiated: ' + isServerInitiated);
+  client.on('disconnected', (data) => {
+    console.log(
+      'Service: ' +
+        data.service +
+        ', Topic: ' +
+        data.topic +
+        ', IsDisposed: ' +
+        data.isDisposed +
+        ', IsServerInitiated: ' +
+        data.isServerInitiated,
+    );
   });
 
-  client.on('advise', function(service, topic, item, text) {
-    console.log('Service: ' + service + ', Topic: ' + topic + ', Item: ' + item + ', Text: ' + text);
+  client.on('advise', (data) => {
+    console.log('Service: ' + data.service + ', Topic: ' + data.topic + ', Item: ' + data.item + ', Text: ' + data.text);
   });
 
   client.startAdvise();

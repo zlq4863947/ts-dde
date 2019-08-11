@@ -1,6 +1,6 @@
 {
   "name": "ts-dde",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Dynamic Data Exchange (DDE) 通信组件",
   "license": "GPL-3.0",
   "main": "dist/index.js",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.16",
-    "@types/node": "^12.6.9",
+    "@types/node": "^12.7.1",
     "import-sort": "^6.0.0",
     "import-sort-cli": "^6.0.0",
     "import-sort-parser-typescript": "^6.0.0",

@@ -31,8 +31,8 @@ const client = new DdeClient({
   },
 });
 
-client.on('advise', (service, topic, item, text) => {
-  console.log('OnAdvise: ' + 'Service: ' + service + ', Topic: ' + topic + ', Item: ' + item + ', Text: ' + text);
+client.on('advise', (data) => {
+  console.log('Service: ' + data.service + ', Topic: ' + data.topic + ', Item: ' + data.item + ', Text: ' + data.text);
 });
 
 client.connect();
@@ -54,8 +54,8 @@ const client = new DdeClient({
   },
 });
 
-client.on('advise', (service, topic, item, text) => {
-  console.log('OnAdvise: ' + 'Service: ' + service + ', Topic: ' + topic + ', Item: ' + item + ', Text: ' + text);
+client.on('advise', (data) => {
+  console.log('Service: ' + data.service + ', Topic: ' + data.topic + ', Item: ' + data.item + ', Text: ' + data.text);
 });
 
 client.connect();

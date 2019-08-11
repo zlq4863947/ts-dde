@@ -1,7 +1,3 @@
-// Node-dde
-// (c) 2013 thunder9 (https://github.com/thunder9)
-// Node-dde may be freely distributed under the MIT license.
-
 using NDde.Client;
 using System;
 using System.Collections.Generic;
@@ -52,7 +48,7 @@ namespace NodeDde
                     obj["service"] = client.Service;
                     obj["topic"] = client.Topic;
                     obj["item"] = args.Item;
-                    obj["text"] = args.Text;
+                    obj["text"] = Encoding.Default.GetString(args.Data).Trim('\0', ' ').ToString();
                     await Task.Run(async () => await onAdvise(obj));
                 };
             }
