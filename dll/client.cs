@@ -181,7 +181,8 @@ namespace NodeDde
                             foreach (DdeClient client in clients)
                             {
                                 var topics = (IDictionary<string, object>)services[client.Service];
-                                var items = (object[])topics[client.Topic];
+                                // var items = (object[])topics[client.Topic];
+                                var items = (string[])opts["item"];
                                 foreach (string item_ in items)
                                 {
                                     var result = client.Request(item_, format, timeout);
@@ -189,7 +190,7 @@ namespace NodeDde
                                     obj["service"] = client.Service;
                                     obj["topic"] = client.Topic;
                                     obj["item"] = item_;
-                                    obj["result"] = Encoding.Default.GetString(result);
+                                    obj["result"] = Encoding.Default.GetString(result).Trim('\0', ' ').ToString();
                                     results.Add(obj);
                                 }
                             }

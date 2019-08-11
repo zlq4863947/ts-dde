@@ -1,9 +1,4 @@
-/**
- * DDE数据结构(三级命名)
- *
- * @interface
- */
-export interface DdeData {
+export interface DdeBaseData {
   /**
    * 服务
    */
@@ -16,6 +11,14 @@ export interface DdeData {
    * 数据项
    */
   item: string;
+}
+
+/**
+ * DDE数据结构(三级命名)
+ *
+ * @interface
+ */
+export interface DdeData extends DdeBaseData {
   /**
    * 数据格式，1：CF_TEXT
    */

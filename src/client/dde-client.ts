@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 
 import { getClientInvoke } from '../utils';
-import { DdeClientOptions, IAsyncResult } from './types';
+import { DdeClientOptions, DdeClientReqeustData, IAsyncResult } from './types';
 
 export class DdeClient extends EventEmitter {
   private readonly invoke: any;
@@ -89,13 +89,13 @@ export class DdeClient extends EventEmitter {
   /**
    * 请求指定项目名称的数据
    *
-   * @param item 项目名称
+   * @param item 项目名称数组
    */
-  request(item: string | null): string {
+  request(item: string[]): DdeClientReqeustData[] {
     return this.invoke(
       {
         method: 'Request',
-        item: item || '',
+        item,
         format: this.format,
         timeout: this.timeout,
       },

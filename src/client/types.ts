@@ -1,4 +1,4 @@
-import { DdeData } from '../server';
+import { DdeBaseData, DdeData } from '../server';
 
 /**
  * 客户端DDE数据结构(三级命名)
@@ -18,6 +18,13 @@ export interface DdeClientData extends DdeData {
    * 服务端是否初始化
    */
   isServerInitiated: boolean;
+}
+
+export interface DdeClientReqeustData extends DdeBaseData {
+  /**
+   * 内容
+   */
+  result: string;
 }
 
 export interface IAsyncResult {
