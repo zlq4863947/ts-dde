@@ -16,3 +16,4 @@ package-lock.json
 jest*
 tsconfig*
 tslint.json
+.DS_Store

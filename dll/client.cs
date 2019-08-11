@@ -182,7 +182,7 @@ namespace NodeDde
                             {
                                 var topics = (IDictionary<string, object>)services[client.Service];
                                 // var items = (object[])topics[client.Topic];
-                                var items = (string[])opts["item"];
+                                var items = (object[])opts["item"];
                                 foreach (string item_ in items)
                                 {
                                     var result = client.Request(item_, format, timeout);
