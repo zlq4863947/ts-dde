@@ -35,7 +35,7 @@ export interface IDdeServer {
   /**
    * 客户端尝试建立会话事件
    */
-  onBeforeConnect: (topic: string) => void;
+  onBeforeConnect: (topic: string) => boolean;
   /**
    * 客户端成功建立会话事件
    * @param service 服务名称
@@ -52,36 +52,33 @@ export interface IDdeServer {
    * 订阅数据事件
    * @param service 服务名称
    * @param topic 频道名称
-   * @param handle 会话关联的DDEML句柄
    * @param item 项目名称
    * @param format 数据格式
    */
-  onStartAdvise: (service: string, topic: string, handle: string, item: string, format: string) => void;
+  onStartAdvise: (service: string, topic: string, item: string, format: string) => boolean;
   /**
    * 退订数据事件
    * @param service 服务名称
    * @param topic 频道名称
-   * @param handle 会话关联的DDEML句柄
    * @param item 项目名称
    */
-  onStopAdvise: (service: string, topic: string, handle: string, item: string) => void;
+  onStopAdvise: (service: string, topic: string, item: string) => void;
   /**
    * 当客户端发送命令时调用此方法
    * @param service 服务名称
    * @param topic 频道名称
-   * @param handle 会话关联的DDEML句柄
    * @param command 命令名称
    */
-  onExecute: (service: string, topic: string, handle: string, command: string) => void;
+  onExecute: (service: string, topic: string, command: string) => string;
   /**
    * 当客户端发送数据时调用此方法
    * @param service 服务名称
    * @param topic 频道名称
-   * @param handle 会话关联的DDEML句柄
    * @param item 项目名称
+   * @param data 数据
    * @param format 数据格式
    */
-  onPoke: (service: string, topic: string, handle: string, item: string, format: string) => void;
+  onPoke: (service: string, topic: string, item: string, data: string, format: string) => string;
   /**
    * 当客户端尝试请求数据时调用此方法
    * @param service 服务名称
@@ -90,14 +87,14 @@ export interface IDdeServer {
    * @param item 项目名称
    * @param format 数据格式
    */
-  onRequest: (service: string, topic: string, handle: string, item: string, format: string) => void;
+  onRequest: (service: string, topic: string, handle: string, item: string, format: string) => string;
   /**
    * 当客户端尝试订阅数据时调用此方法
    * @param service 服务名称
    * @param topic 频道名称
    * @param item 项目名称
    */
-  onAdvise: (service: string, topic: string, item: string) => void;
+  onAdvise: (service: string, topic: string, item: string) => string;
 }
 
 export interface DdeServerPoyloadCallbacks {

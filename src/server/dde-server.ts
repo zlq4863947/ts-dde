@@ -10,15 +10,15 @@ export class DdeServer extends EventEmitter {
     this.invoke = getServerInvoke(this);
   }
 
-  onBeforeConnect = (topic?: string) => true;
-  onAfterConnect = (service: string, topic: string) => void 0;
-  onDisconnect = (service: string, topic: string) => void 0;
-  onStartAdvise = (...args: any[]) => true;
-  onStopAdvise = (...args: any[]) => void 0;
-  onExecute = (...args: any[]) => void 0;
-  onPoke = (...args: any[]) => void 0;
-  onRequest = (...args: any[]) => '';
-  onAdvise = (...args: any[]) => '';
+  onBeforeConnect = (topic: string) => true;
+  onAfterConnect = (service: string, topic: string) => undefined;
+  onDisconnect = (service: string, topic: string) => undefined;
+  onStartAdvise = (service: string, topic: string, item: string, format: string) => true;
+  onStopAdvise = (service: string, topic: string, item: string) => undefined;
+  onExecute = (service: string, topic: string, command: string) => '';
+  onPoke = (service: string, topic: string, item: string, data: string[], format: string) => '';
+  onRequest = (service: string, topic: string, item: string, format: string) => '';
+  onAdvise = (service: string, topic: string, item: string) => '';
 
   /**
    * 注册服务
