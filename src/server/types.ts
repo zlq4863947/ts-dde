@@ -83,18 +83,17 @@ export interface IDdeServer {
    * 当客户端尝试请求数据时调用此方法
    * @param service 服务名称
    * @param topic 频道名称
-   * @param handle 会话关联的DDEML句柄
    * @param item 项目名称
    * @param format 数据格式
    */
   onRequest: (service: string, topic: string, handle: string, item: string, format: string) => string;
   /**
    * 当客户端尝试订阅数据时调用此方法
-   * @param service 服务名称
    * @param topic 频道名称
    * @param item 项目名称
+   * @param format 数据格式
    */
-  onAdvise: (service: string, topic: string, item: string) => string;
+  onAdvise: (topic: string, item: string, format: string) => string;
 }
 
 export interface DdeServerPoyloadCallbacks {

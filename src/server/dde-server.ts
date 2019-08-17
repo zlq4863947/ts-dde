@@ -18,7 +18,7 @@ export class DdeServer extends EventEmitter {
   onExecute = (service: string, topic: string, command: string) => '';
   onPoke = (service: string, topic: string, item: string, data: string[], format: string) => '';
   onRequest = (service: string, topic: string, item: string, format: string) => '';
-  onAdvise = (service: string, topic: string, item: string) => '';
+  onAdvise = (topic: string, item: string, format: string) => '';
 
   /**
    * 注册服务
